@@ -16,15 +16,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="w-full max-w-[900px] m-auto">
+      <body className="w-full">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          <Navigation />
-          {children}
+            <Navigation />
+            {children}
         </ThemeProvider>
       </body>
     </html>
