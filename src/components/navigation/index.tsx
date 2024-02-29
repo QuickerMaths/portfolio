@@ -20,7 +20,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 
 const Navigation = () => {
   return (
-    <div className='w-full fixed border-b border-black dark:border-white backdrop-blur-sm shadow-sm shadow-gray-200 dark:shadow-white'>
+    <div className='w-full sticky top-0 border-b border-black dark:border-white backdrop-blur-sm shadow-sm shadow-gray-200 dark:shadow-white'>
       <div className="content-container py-5 px-10 flex justify-between items-center">
         <Menu />
         <ThemeSwitch />
