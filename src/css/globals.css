@@ -76,4 +76,8 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  .content-container {
+    @apply w-full max-w-[900px] mx-auto;
+  }
 }
