@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 const config = {
   darkMode: ["class"],
@@ -9,7 +10,11 @@ const config = {
     './src/**/*.{ts,tsx}',
 	],
   prefix: "",
-  theme: {
+  theme: { 
+    fontFamily: {
+      sans: ["Open Sans", ...defaultTheme.fontFamily.sans],
+      serif: ["Titillium Web", "serif"],
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -74,7 +79,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [ require("tailwindcss-animate"), ],
 } satisfies Config
 
 export default config
