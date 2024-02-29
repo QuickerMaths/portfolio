@@ -1,5 +1,9 @@
+import Hero from '@/components/hero/index'
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+    <main className="min-h-screen content-container flex flex-col items-center py-10 px-5">
+      <Hero />
+    </main>
   );
 }
