@@ -47,7 +47,7 @@ export const StickyScrollMobile = ({
         className="cover bg-center block min-h-[10rem] lg:h-60 w-full lg:w-80 rounded-md bg-white sticky top-0 z-[10]"
       >
       </motion.div>  
-      <div className="relative flex items-start px-10 mt-10 z-[-1]">
+      <div className="relative flex items-start px-10 z-[-1]">
         <div className="max-w-2xl max-h-[400px]">
           {content.map((item, index) => (
             <div key={item.title + index} className="my-20">
@@ -75,7 +75,6 @@ export const StickyScrollMobile = ({
               </motion.p>
             </div>
           ))}
-          <div className="h-40"/>
         </div>
       </div>
     </motion.div>
