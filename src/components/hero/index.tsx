@@ -20,7 +20,7 @@ const Hero = () => {
                 </a>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <a href="https://linkedin.com/matuesz.szalowicz" target='_blank'>
+                <a href="https://linkedin.com/in/mateusz-szalowicz" target='_blank'>
                   <LinkedInLogoIcon />
                 </a>
               </Button>
