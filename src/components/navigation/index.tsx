@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import {
   NavigationMenu,
@@ -20,7 +20,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 
 const Navigation = () => {
   return (
-    <div className='w-full fixed border-b border-black dark:border-white backdrop-blur-sm shadow-sm shadow-gray-200 dark:shadow-white'>
+    <div className='w-full fixed border-b border-secondary dark:border-secondary'>
       <div className="content-container py-5 px-10 flex justify-between items-center">
         <Menu />
         <ThemeSwitch />
@@ -43,8 +43,10 @@ const Menu = () => {
 }
 
 const MobileMenu = () => {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon">
           <HamburgerMenuIcon />
@@ -52,19 +54,19 @@ const MobileMenu = () => {
       </SheetTrigger>
       <SheetContent side="left" className="p-8 flex items-center w-full min-[360px]:w-[80%]">
         <nav>
-          <ul className='font-serif text-[4rem] flex flex-col justify-center items-start gap-5'>
+          <ul className='font-serif text-[4rem] flex flex-col justify-center items-start gap-5 text-primary'>
             <li>
-              <Link href="/">
+              <Link href="/" onClick={() => setOpen(false)}>
                 Home
               </Link> 
             </li>
             <li>
-              <Link href="/projects">
+              <Link href="/projects"  onClick={() => setOpen(false)}> 
                 Projects
               </Link> 
             </li>
             <li>
-              <Link href="/contact">
+              <Link href="/contact"  onClick={() => setOpen(false)}>
                 Contact
               </Link> 
             </li>
