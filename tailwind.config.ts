@@ -16,8 +16,8 @@ const config = {
   prefix: "",
   theme: { 
     fontFamily: {
-      sans: ["Open Sans", ...defaultTheme.fontFamily.sans],
-      serif: ["Titillium Web", "serif"],
+      sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
+      serif: ["Bebas Neue", "serif"],
     },
     container: {
       center: true,
