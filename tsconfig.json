@@ -23,6 +23,9 @@
       "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
+  "mdx": {
+    "checkMdx": true
+  },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
