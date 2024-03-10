@@ -4,13 +4,11 @@
 import React, { useRef } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
+import { Project } from "contentlayer/generated";
+import ProjectPreview from "../project-preview"; 
 
 interface StickyScrollProps {
-  content: {
-    title: string;
-    description: string;
-    imageSrc: string;
-  }[];
+  content: Project[];
 }
 
 export const StickyScrollMobile = ({
@@ -33,7 +31,7 @@ export const StickyScrollMobile = ({
     });
   });
 
-  const mappedImages = content.map((item) => item.imageSrc);
+  const mappedImages = content.map((item) => item.image_src);
 
   return (
     <motion.div
@@ -50,30 +48,7 @@ export const StickyScrollMobile = ({
       <div className="relative flex items-start px-10 z-[-1]">
         <div className="max-w-2xl max-h-[400px]">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
-              <motion.h2
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-2xl font-bold text-primary"   
-              >
-                {item.title}
-              </motion.h2>
-              <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-lg text-secondary max-w-sm mt-10"
-              >
-                {item.description}
-              </motion.p>
-            </div>
+            <ProjectPreview project={item} index={index} activeCard={activeCard} />
           ))}
         </div>
       </div>
