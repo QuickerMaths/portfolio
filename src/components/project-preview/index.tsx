@@ -12,7 +12,7 @@ interface ProjectPreviewProps {
     const MotionLink = motion(Link)
   
     return (
-      <div key={project.title + index} className="my-20">
+      <div className="my-20">
         <motion.h2
           initial={{
             opacity: 0,
