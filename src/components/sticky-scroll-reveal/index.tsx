@@ -50,7 +50,7 @@ export const StickyScroll = ({
         animate={{
           backgroundImage: `url(${mappedImages[activeCard]})`,
         }}
-        className="cover bg-center hidden lg:block h-60 w-[27rem] rounded-md bg-white sticky top-10 overflow-hidden"
+        className="bg-cover bg-center hidden lg:block h-60 w-[27rem] rounded-md bg-white sticky top-10 overflow-hidden"
       ></motion.div>
     </motion.div>
   );
