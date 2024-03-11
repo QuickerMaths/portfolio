@@ -42,7 +42,7 @@ interface ProjectPreviewProps {
           animate={{
             opacity: activeCard === index ? 1 : 0.3,
           }}
-          className="text-kg text-primary max-w-sm"
+          className="text-kg text-primary max-w-sm hover:text-secondary duration-200"
           href={`/projects/${project.slug}`}
         >
           Read more ...
