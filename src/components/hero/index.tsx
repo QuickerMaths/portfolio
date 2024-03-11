@@ -6,7 +6,7 @@ import { GitHubLogoIcon, LinkedInLogoIcon, EnvelopeClosedIcon } from "@radix-ui/
 
 const Hero = () => {
   return (
-    <div className="flex flex-col-reverse sm:flex-row items-center gap-5 max-w-[480px] sm:max-w-[600px]">
+    <div className="mx-auto flex flex-col-reverse sm:flex-row items-center gap-5 max-w-[480px] sm:max-w-[600px]">
         <div className="flex flex-col justify-center gap-2">
             <h1 className="text-3xl min-[340px]:text-4xl min-[440px]:text-5xl font-serif text-primary">Matuesz Szałowicz</h1>
             <h2 className='text-secondary dark:text-secondary font-semibold'>Web developer</h2>
