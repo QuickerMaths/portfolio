@@ -20,7 +20,7 @@ const components = {
 	h2: ({ className, ...props }) => (
 		<h2
 			className={clsx(
-				"mt-10 scroll-m-20 border-b border-b-zinc-800 pb-1 text-3xl font-semibold tracking-tight first:mt-0",
+				"mt-10 scroll-m-20 border-b border-b-zinc-800 pb-1 text-3xl text-primary font-semibold tracking-tight first:mt-0",
 				className,
 			)}
 			{...props}
@@ -78,7 +78,7 @@ const components = {
 		/>
 	),
 	ul: ({ className, ...props }) => (
-		<ul className={clsx("my-6 ml-6 list-disc", className)} {...props} />
+		<ul className={clsx("my-6 ml-6 list-disc marker:text-primary", className)} {...props} />
 	),
 	ol: ({ className, ...props }) => (
 		<ol className={clsx("my-6 ml-6 list-decimal", className)} {...props} />
@@ -102,7 +102,7 @@ const components = {
 	}: React.ImgHTMLAttributes<HTMLImageElement>) => (
 		// eslint-disable-next-line @next/next/no-img-element
 		<img
-			className={clsx("rounded-md border border-zinc-200", className)}
+			className={clsx("rounded-md border-[2px] border-solid border-secondary my-5", className)}
 			alt={alt}
 			{...props}
 		/>
