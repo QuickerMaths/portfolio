@@ -45,7 +45,7 @@ export const StickyScrollMobile = ({
         className="bg-contain bg-no-repeat bg-center block min-h-[10rem] lg:h-60 w-full lg:w-80 rounded-md bg-transparent sticky top-0 z-[10]"
       >
       </motion.div>  
-      <div className="relative flex items-start px-10 z-[-1]">
+      <div className="relative flex items-start px-10 ">
         <div className="max-w-2xl max-h-[400px]">
           {content.map((item, index) => (
             <ProjectPreview project={item} index={index} activeCard={activeCard} key={item.title + index}/>
