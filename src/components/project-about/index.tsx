@@ -16,7 +16,7 @@ const ProjectAbout = ({project}: ProjectAboutProps) => {
   if (project.repository) {
 		links.push({
 			label: "GitHub",
-			href: `https://github.com/${project.repository}`,
+			href: `https://github.com/QuickerMaths/${project.repository}`,
 		});
 	}
 
