@@ -42,7 +42,7 @@ export const StickyScrollMobile = ({
         animate={{
             backgroundImage: `url(${mappedImages[activeCard]})`,
         }}
-        className="cover bg-center block min-h-[10rem] lg:h-60 w-full lg:w-80 rounded-md bg-white sticky top-0 z-[10]"
+        className="bg-contain bg-no-repeat bg-center block min-h-[10rem] lg:h-60 w-full lg:w-80 rounded-md bg-transparent sticky top-0 z-[10]"
       >
       </motion.div>  
       <div className="relative flex items-start px-10 z-[-1]">
@@ -50,6 +50,7 @@ export const StickyScrollMobile = ({
           {content.map((item, index) => (
             <ProjectPreview project={item} index={index} activeCard={activeCard} key={item.title + index}/>
           ))}
+          <p className="my-5">See rest of my projects <a href="https://github.com/QuickerMaths" target="_blank" className="text-primary underline cursor-pointer">here.</a></p>
         </div>
       </div>
     </motion.div>

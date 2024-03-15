@@ -43,7 +43,9 @@ export const StickyScroll = ({
           {content.map((item, index) => 
             <ProjectPreview project={item} index={index} activeCard={activeCard} key={item.title + index} />
           )}
-          <div className="h-40" />
+          <div className="min-h-40">
+            <p>See rest of my projects <a href="https://github.com/QuickerMaths" target="_blank" className="text-primary underline cursor-pointer">here.</a> </p>
+          </div>
         </div>
       </div>
       <motion.div
