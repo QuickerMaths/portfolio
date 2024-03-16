@@ -11,7 +11,7 @@ import {
 } from "react";
 import { sleep, PAGE_TRANSITION_DURATION } from "@/lib/utils";
 
-export const DELAY = 100;
+export const DELAY = 50;
 
 const noop = () => {};
 
@@ -45,7 +45,7 @@ export default function Transitions({ children, className }: Props) {
   const navigate = (href: string) => {
     start(async () => {
       router.push(href);
-      await sleep(PAGE_TRANSITION_DURATION + DELAY);
+      await sleep(DELAY);
     });
   };
 

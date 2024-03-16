@@ -5,8 +5,6 @@ import { Mdx } from "@/components/mdx";
 import "../../../css/mdx.css"
 import { Separator } from "@/components/ui/separator";
 
-export const revalidate = 60;
-
 type Props = {
   params: {
     slug: string;
