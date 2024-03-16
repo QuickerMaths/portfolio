@@ -9,12 +9,10 @@ import {
   use,
   useTransition,
 } from "react";
-import { PAGE_TRANSITION_DURATION } from "@/lib/utils";
+import { sleep, PAGE_TRANSITION_DURATION } from "@/lib/utils";
 
 export const DELAY = 100;
 
-const sleep = (ms: number) =>
-  new Promise<void>((resolve) => setTimeout(() => resolve(), ms));
 const noop = () => {};
 
 type TransitionContext = {
@@ -47,7 +45,7 @@ export default function Transitions({ children, className }: Props) {
   const navigate = (href: string) => {
     start(async () => {
       router.push(href);
-      await (DELAY);
+      await sleep(DELAY);
     });
   };
 
