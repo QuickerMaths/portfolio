@@ -70,7 +70,6 @@ export default function Transitions({ children, className }: Props) {
 export function Animate({ children, className }: Props) {
   const { pending } = usePageTransition();
   return (
-    <LayoutGroup>
       <AnimatePresence>
         {!pending && (
           <motion.div
@@ -84,6 +83,5 @@ export function Animate({ children, className }: Props) {
           </motion.div>
         )}
       </AnimatePresence>
-    </LayoutGroup>
   );
 }
