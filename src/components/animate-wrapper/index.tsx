@@ -79,7 +79,7 @@ export function Animate({ children, className }: Props) {
             initial={{ opacity: 0, scale: 2, y: 100 }}
             animate={{ opacity: 1, scale: 1, y: 0}}
             exit={{ opacity: 0, scale: 0.5, y: -100}}
-            transition={{ duration: PAGE_TRANSITION_DURATION }}
+            transition={{ duration: PAGE_TRANSITION_DURATION / 1000 }}
             className={className}
           >
             {children}
