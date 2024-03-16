@@ -45,7 +45,7 @@ export default function Transitions({ children, className }: Props) {
   const navigate = (href: string) => {
     start(async () => {
       router.push(href);
-      await sleep(DELAY);
+      await sleep(PAGE_TRANSITION_DURATION + DELAY);
     });
   };
 
