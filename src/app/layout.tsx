@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "../css/globals.css";
 import Navigation from "@/components/navigation";
-import { ThemeProvider } from "@/components/theme-provider"
-import { LayoutTransition } from "@/components/layout-transition";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "QuickerMaths portfolio",
@@ -25,9 +24,7 @@ export default function RootLayout({
             >
 
             <Navigation />
-            <LayoutTransition>
                 {children}
-            </LayoutTransition>
           </ThemeProvider>
       </body>
     </html>
