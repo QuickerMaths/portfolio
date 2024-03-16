@@ -25,4 +25,4 @@ export function cn(...inputs: ClassValue[]) {
 export const sleep = (ms: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), ms));
 
-export const PAGE_TRANSITION_DURATION = 500
+export const PAGE_TRANSITION_DURATION = 1000
