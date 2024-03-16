@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "../css/globals.css";
 import Navigation from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider"
-import Transitions, { Animate } from "@/components/animate-wrapper";
+import { LayoutTransition } from "@/components/layout-transition";
 
 export const metadata: Metadata = {
   title: "QuickerMaths portfolio",
@@ -23,12 +23,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
             >
-               <Transitions className="h-full flex flex-col ">
-                <Navigation />
-                <Animate className="flex-1">
-                  {children}
-                </Animate>
-              </Transitions>
+
+            <Navigation />
+            <LayoutTransition>
+                {children}
+            </LayoutTransition>
           </ThemeProvider>
       </body>
     </html>
