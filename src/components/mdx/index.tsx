@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as React from "react";
-import Image from "next/image";
+import Image, { ImageProps } from 'next/image'
 import Link from "next/link";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
@@ -101,12 +101,17 @@ const components = {
 		...props
 	}: React.ImgHTMLAttributes<HTMLImageElement>) => (
 		// eslint-disable-next-line @next/next/no-img-element
-		<img
-			className={clsx("rounded-md border-[2px] border-solid border-secondary my-5", className)}
-			alt={alt}
-			{...props}
-		/>
-	),
+		<Image
+		className={clsx("rounded-md border-[2px] border-solid border-secondary my-5", className)}
+		alt={alt}
+		width={800}
+		height={400}
+		placeholder={(props as ImageProps).blurDataURL ? "blur" : "empty"}
+		blurDataURL={(props as ImageProps).blurDataURL }
+        {...(props as ImageProps)}
+		loading="lazy"
+      />
+    ),
 	hr: ({ ...props }) => (
 		<hr className="my-4 border-zinc-200 md:my-8" {...props} />
 	),
