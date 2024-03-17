@@ -16,18 +16,20 @@ export enum LOADING_STATES {
   FINISHED = "FINISHED",
 }
 
-export const PAGE_TRANSITION = 1000;
+export const PAGE_TRANSITION = 2000;
 
 export interface NavigationContextType {
   goToRoute: (route: string) => void;
   loading: LOADING_STATES;
   setLoading: React.Dispatch<React.SetStateAction<LOADING_STATES>>;
+  futurePath: string;
 }
 
 export const NavigationContext = createContext<NavigationContextType>({
   goToRoute: (route: string) => {},
-  loading: LOADING_STATES.INIT,
+  loading: LOADING_STATES.FINISHED,
   setLoading: () => {},
+  futurePath: "",
 });
 
 export const NavigationContextProvider = ({
@@ -36,10 +38,12 @@ export const NavigationContextProvider = ({
   children: ReactNode;
 }) => {
   const router = useRouter();
-  const [loading, setLoading] = useState<LOADING_STATES>(LOADING_STATES.INIT);
+  const [loading, setLoading] = useState<LOADING_STATES>(LOADING_STATES.FINISHED);
+  const [futurePath, setFuturePath] = useState<string>("");
 
   const goToRoute = async (path: string) => {
     setLoading(LOADING_STATES.LOADING);
+    setFuturePath(path);
     setTimeout(() => {
       router.push(path);
     }, PAGE_TRANSITION);
@@ -49,6 +53,7 @@ export const NavigationContextProvider = ({
     goToRoute,
     loading,
     setLoading,
+    futurePath,
   };
 
   return (
