@@ -16,7 +16,7 @@ export enum LOADING_STATES {
   FINISHED = "FINISHED",
 }
 
-export const ANIMATION_DURATION = 1000;
+export const PAGE_TRANSITION = 1000;
 
 export interface NavigationContextType {
   goToRoute: (route: string) => void;
@@ -42,7 +42,7 @@ export const NavigationContextProvider = ({
     setLoading(LOADING_STATES.LOADING);
     setTimeout(() => {
       router.push(path);
-    }, ANIMATION_DURATION);
+    }, PAGE_TRANSITION);
   };
 
   const contextValue = {
