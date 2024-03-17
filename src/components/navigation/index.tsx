@@ -1,13 +1,10 @@
 "use client"
 
 import React, { useState } from 'react'
-import Link from 'next/link'
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu"
 import {
   Sheet,
@@ -17,6 +14,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { ThemeSwitch } from "@/components/theme-switch"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons"
+import Navigate from '../navigation-link'
+import { usePathname } from 'next/navigation'
 
 const Navigation = () => {
   return (
@@ -30,16 +29,13 @@ const Navigation = () => {
 }
 
 const Menu = () => {
-  return (
-    <div>
-      <div className="hidden md:block">
-        <DesktopMenu />
-      </div>
-      <div className='md:hidden'>
-        <MobileMenu />
-      </div>
-    </div>
-  )
+  const width = window.innerWidth
+
+  if (width < 768 || typeof window === "undefined") {
+    return <MobileMenu />
+  } else {
+    return <DesktopMenu />
+  }
 }
 
 const MobileMenu = () => {
@@ -56,19 +52,19 @@ const MobileMenu = () => {
         <nav>
           <ul className='font-serif text-[4rem] flex flex-col justify-center items-start gap-5 text-primary'>
             <li>
-              <Link href="/" onClick={() => setOpen(false)}>
+              <Navigate href="/" setOpen={setOpen}>
                 Home
-              </Link> 
+              </Navigate>
             </li>
             <li>
-              <Link href="/projects"  onClick={() => setOpen(false)}> 
+              <Navigate href="/projects" setOpen={setOpen}>
                 Projects
-              </Link> 
+              </Navigate>
             </li>
             <li>
-              <Link href="/contact"  onClick={() => setOpen(false)}>
+              <Navigate href="/contact" setOpen={setOpen}>
                 Contact
-              </Link> 
+              </Navigate>
             </li>
           </ul>
         </nav>
@@ -78,29 +74,25 @@ const MobileMenu = () => {
 }
 
 const DesktopMenu = () => {
+  const pathname = usePathname()
+
   return (
     <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+      <NavigationMenuList className='flex justify-center items-center gap-5 font-semibold font-sans text-secondary'>
+        <NavigationMenuItem  className={`${pathname === "/" ? "text-primary" : ""}`}>
+          <Navigate href="/">
               Home
-            </NavigationMenuLink>
-          </Link>
+          </Navigate>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/projects" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+        <NavigationMenuItem  className={`${pathname === "/projects" ? "text-primary" : ""}`}>
+          <Navigate href="/projects">
               Projects
-            </NavigationMenuLink>
-          </Link>
+          </Navigate>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/contact" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+        <NavigationMenuItem  className={`${pathname === "/contact" ? "text-primary" : ""}`}>
+          <Navigate href="/contact">
               Contact
-            </NavigationMenuLink>
-          </Link>
+          </Navigate>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

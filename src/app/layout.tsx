@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../css/globals.css";
 import Navigation from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
+import { NavigationContextProvider } from "@/context/navigation.context";
 
 export const metadata: Metadata = {
   title: "QuickerMaths portfolio",
@@ -16,16 +17,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="w-full">
+        <NavigationContextProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
             enableSystem
             disableTransitionOnChange
             >
-
-            <Navigation />
+                <Navigation />
                 {children}
           </ThemeProvider>
+        </NavigationContextProvider>
       </body>
     </html>
   );
