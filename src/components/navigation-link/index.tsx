@@ -4,7 +4,7 @@ import {
   useNavigationContext,
 } from "@/context/navigation.context";
 import Link from "next/link";
-import { ForwardedRef, forwardRef, useLayoutEffect } from "react";
+import { ForwardedRef, forwardRef, useLayoutEffect, ForwardRefRenderFunction } from "react";
 import { usePathname } from "next/navigation";
 
 type NavigateProps = {
@@ -14,7 +14,9 @@ type NavigateProps = {
   children: React.ReactNode;
 };
 
-const Navigate = forwardRef((props: NavigateProps, ref: ForwardedRef<HTMLAnchorElement>) => {
+type RefProps = HTMLAnchorElement
+
+const Navigate: ForwardRefRenderFunction<RefProps, NavigateProps> = (props, ref) => {
   const { href, children, setOpen, className } = props;
   const { goToRoute, setLoading } = useNavigationContext();
   const pathname = usePathname();
@@ -36,7 +38,6 @@ const Navigate = forwardRef((props: NavigateProps, ref: ForwardedRef<HTMLAnchorE
       <a ref={ref} className={className} onClick={handleClick}>{children}</a>
     </Link>
   );
-})
+}
 
-
-export default Navigate
+export default forwardRef(Navigate)
