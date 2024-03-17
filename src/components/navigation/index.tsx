@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -16,6 +16,8 @@ import { ThemeSwitch } from "@/components/theme-switch"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 import Navigate from '../navigation-link'
 import { usePathname } from 'next/navigation'
+import useDeviceSize from '@/hooks/useDeviceSize'
+
 
 const Navigation = () => {
   return (
@@ -28,14 +30,10 @@ const Navigation = () => {
   )
 }
 
-const Menu = () => {
-  const width = window.innerWidth
+const Menu = () => {  
+  const [width] = useDeviceSize()
 
-  if (width < 768 || typeof window === "undefined") {
-    return <MobileMenu />
-  } else {
-    return <DesktopMenu />
-  }
+  return width > 768 ? <DesktopMenu /> : <MobileMenu />
 }
 
 const MobileMenu = () => {
