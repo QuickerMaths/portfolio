@@ -1,6 +1,6 @@
 import type { Project } from "contentlayer/generated";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import Navigate from "../navigation-link";
 
 interface ProjectPreviewProps {
     project: Project;
@@ -9,7 +9,7 @@ interface ProjectPreviewProps {
   }
   
   const ProjectPreview = ({ project, index, activeCard }: ProjectPreviewProps) => {
-    const MotionLink = motion(Link)
+    const MotionLink = motion(Navigate)
   
     return (
       <div className="my-20">
@@ -42,7 +42,7 @@ interface ProjectPreviewProps {
           animate={{
             opacity: activeCard === index ? 1 : 0.3,
           }}
-          className="text-kg text-primary max-w-sm hover:text-secondary duration-200"
+          className="text-lg text-primary max-w-sm hover:text-secondary duration-200"
           href={`/projects/${project.slug}`}
         >
           Read more ...
