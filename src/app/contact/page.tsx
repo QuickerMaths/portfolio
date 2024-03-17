@@ -1,9 +1,7 @@
 import React from 'react'
 import ContactForm from '@/components/contact-form'
-import { sleep, PAGE_TRANSITION_DURATION } from '@/lib/utils';
 
 const Contact = async () => {
-
   return (
     <main className='w-full min-h-screen flex justify-center items-center gap-10'>
         <ContactForm />
