@@ -38,13 +38,14 @@ export const StickyScrollMobile = ({
       className="h-[30rem] overflow-y-auto flex flex-col items-center relative rounded-md px-5"
       ref={ref}
     >
-      <motion.div 
-        animate={{
-            backgroundImage: `url(${mappedImages[activeCard]})`,
-        }}
-        className="bg-contain bg-no-repeat bg-center block min-h-[10rem] lg:h-60 w-full lg:w-80 rounded-md bg-transparent sticky top-0 z-[10]"
-      >
-      </motion.div>  
+      <div className="sticky top-0 py-10 z-10 w-full bg-background h-full">
+        <motion.div 
+          animate={{
+              backgroundImage: `url(${mappedImages[activeCard]})`,
+          }}
+          className="bg-contain bg-no-repeat bg-center block min-h-[10rem] md:h-[12rem] lg:h-60 w-full lg:w-80 rounded-md bg-transparent sticky top-0 z-10"
+        />
+      </div>
       <div className="relative flex items-start px-10 ">
         <div className="max-w-2xl max-h-[400px]">
           {content.map((item, index) => (
