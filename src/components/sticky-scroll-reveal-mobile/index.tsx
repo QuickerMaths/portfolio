@@ -6,16 +6,18 @@ import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import { Project } from "contentlayer/generated";
 import ProjectPreview from "../project-preview"; 
+import Image from "next/image";
 
 interface StickyScrollProps {
   content: Project[];
 }
 
-export const StickyScrollMobile = ({
+const StickyScrollMobile = ({
   content,
 }: StickyScrollProps) => {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<any>(null);
+  const MotionImage = motion(Image)
   const { scrollYProgress } = useScroll({
     container: ref,
     offset: ["start start", "end start"],
@@ -39,12 +41,16 @@ export const StickyScrollMobile = ({
       ref={ref}
     >
       <div className="sticky top-0 py-10 z-10 w-full bg-background h-full">
-        <motion.div 
-          animate={{
-              backgroundImage: `url(${mappedImages[activeCard]})`,
-          }}
-          className="bg-contain bg-no-repeat bg-center block min-h-[10rem] md:h-[12rem] lg:h-60 w-full lg:w-80 rounded-md bg-transparent sticky top-0 z-10"
-        />
+      <MotionImage
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }} 
+        transition={{ duration: 1 }}
+        className="bg-contain bg-no-repeat bg-center block min-h-[10rem] md:h-[12rem] lg:h-60 w-full lg:w-80 rounded-md bg-transparent sticky top-0 z-10"
+        src={mappedImages[activeCard] as string}
+        alt="project preview"
+        width={500}
+        height={200}
+      />
       </div>
       <div className="relative flex items-start px-10 ">
         <div className="max-w-2xl max-h-[400px]">
@@ -57,3 +63,5 @@ export const StickyScrollMobile = ({
     </motion.div>
   );
 }
+
+export default StickyScrollMobile

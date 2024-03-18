@@ -6,16 +6,19 @@ import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import type { Project } from "contentlayer/generated";
 import ProjectPreview from "../project-preview";
+import Image from "next/image";
 
 interface StickyScrollProps {
   content: Project[];
 }
 
-export const StickyScroll = ({
+const StickyScroll = ({
   content,
 }: StickyScrollProps) => {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<any>(null);
+  const MotionImage = motion(Image)
+
   const { scrollYProgress } = useScroll({
     container: ref,
     offset: ["start start", "end start"],
@@ -48,16 +51,21 @@ export const StickyScroll = ({
           </div>
         </div>
       </div>
-      <motion.div
-        animate={{
-          backgroundImage: `url(${mappedImages[activeCard]})`,
-        }}
+      <MotionImage
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }} 
+        transition={{ duration: 1 }}
         className="bg-cover bg-center hidden lg:block h-60 w-[27rem] rounded-md bg-white sticky top-10 overflow-hidden"
-      ></motion.div>
+        src={mappedImages[activeCard] as string}
+        alt="project preview"
+        width={1000}
+        height={400}
+      />
     </motion.div>
   );
 };
 
+export default StickyScroll
 
 
 
