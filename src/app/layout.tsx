@@ -3,6 +3,7 @@ import "../css/globals.css";
 import Navigation from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavigationContextProvider } from "@/context/navigation.context";
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "QuickerMaths portfolio",
@@ -26,6 +27,7 @@ export default function RootLayout({
             >
                 <Navigation />
                 {children}
+                <Toaster />                
           </ThemeProvider>
         </NavigationContextProvider>
       </body>

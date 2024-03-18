@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { MutableRefObject, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -17,6 +17,8 @@ import {
 import { z } from "zod"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { zodResolver } from "@hookform/resolvers/zod"
+import emailjs from '@emailjs/browser';
+import { useToast } from "@/components/ui/use-toast"
 
 const formSchema = z.object({
     email: z.string().email({
@@ -31,25 +33,48 @@ const formSchema = z.object({
   })
 
 const ContactForm = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          name: "",
-          email: "",
-          message: "",
-        },
+  const formRef = useRef() as MutableRefObject<HTMLFormElement>
+  const { toast } = useToast()
+
+  const form = useForm<z.infer<typeof formSchema>>({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+       name: "",
+        email: "",
+        message: "",
+      },
+    })
+   
+  async function onSubmit(_values: z.infer<typeof formSchema>) {
+    return emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID as string, 
+        process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID as string, 
+        formRef.current, {
+        publicKey: process.env.NEXT_PUBLIC_EMAIL_JS_PB_KEY,
       })
-     
-      function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
-        
-        form.reset()
-      }
+      .then((res) => {
+        if(res.status === 200) {
+          toast({
+            title: "Message sent successfully!",
+            description: "I will get back to you as soon as possible.",
+            variant: "success",
+          })  
+          form.reset()
+        }    
+      }).catch((_error) => { 
+        toast({
+          title: "Ups, something went wrong!",
+          description: "Please try again later or contact me directly using my gmail address or leave me a message on LinkedIn.",
+          variant: "destructive",
+        })
+      });
+  }
     
   return (
     <div className='w-[90%] sm:w-full md:max-w-[600px] lg:max-w-[700px] py-5 px-10 md:py-10 md:px-20'>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" ref={formRef}>
           <FormField
             control={form.control}
             name="name"
