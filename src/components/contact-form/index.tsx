@@ -30,6 +30,7 @@ const formSchema = z.object({
     message: z.string().min(10, {
         message: "Message must be at least 10 characters.",
     }),
+    hidden: z.string()
   })
 
 const ContactForm = () => {
@@ -39,13 +40,16 @@ const ContactForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-       name: "",
+        name: "",
         email: "",
         message: "",
+        hidden: ""
       },
     })
    
-  async function onSubmit(_values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if(values.hidden.length > 0) return
+    
     return emailjs
       .sendForm(
         process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID as string, 
@@ -113,6 +117,19 @@ const ContactForm = () => {
                   <Textarea placeholder="Your Message" {...field} />
                 </FormControl>
                 <FormDescription className='sr-only'>Input field for message to a recipient</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="hidden"
+            render={({ field }) => (
+              <FormItem className="h-0 w-0 invisible pointer-events-none">
+                <FormLabel className='sr-only'>Hidden</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
