@@ -6,8 +6,34 @@ import { NavigationContextProvider } from "@/context/navigation.context";
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: "QuickerMaths portfolio",
-  description: "QuickerMaths web development portfolio",
+  title: {
+    default: "Mateusz Szalowicz | Fullstack developer",
+    template: "%s | szalowicz.dev",
+  },
+  description: "Hi I'm Mateusz. Fullstack Typescript developer.",
+  openGraph: {
+    title: "szalowicz.dev",
+    description:
+      "Hi I'm Mateusz. Fullstack Typescript developer.",
+    url: "https://szalowicz.dev",
+    siteName: "szalowicz.dev",
+    locale: "en-US",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
