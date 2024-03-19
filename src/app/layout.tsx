@@ -7,14 +7,13 @@ import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: {
-    default: "Mateusz Szalowicz | Fullstack developer",
+    default: "Mateusz Szalowicz | Web developer",
     template: "%s | szalowicz.dev",
   },
-  description: "Hi I'm Mateusz. Fullstack Typescript developer.",
+  description: "Hi, I'm Mateusz, a web developer passionate about creating amazing websites and web applications.",
   openGraph: {
     title: "szalowicz.dev",
-    description:
-      "Hi I'm Mateusz. Fullstack Typescript developer.",
+    description: "Hi, I'm Mateusz, a web developer passionate about creating amazing websites and web applications.",
     url: "https://szalowicz.dev",
     siteName: "szalowicz.dev",
     locale: "en-US",
