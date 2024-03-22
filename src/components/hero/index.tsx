@@ -36,7 +36,7 @@ const Hero = () => {
           alt="Profile image of Mateusz Szałowicz"
           width={100}
           height={180}
-          className='rounded-full'
+          className='rounded-full h-full w-auto'
           placeholder='blur'
           quality={100}
           blurDataURL={profileImage.blurDataURL}
