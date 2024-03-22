@@ -21,12 +21,12 @@ import useDeviceSize from '@/hooks/useDeviceSize'
 
 const Navigation = () => {
   return (
-    <div className='w-full sticky top-0 border-b backdrop-blur-sm border-secondary dark:border-secondary'>
+    <header className='w-full sticky top-0 border-b backdrop-blur-sm border-secondary dark:border-secondary'>
       <div className="content-container py-5 px-10 flex justify-between items-center">
         <Menu />
         <ThemeSwitch />
       </div>
-    </div>
+    </header>
   )
 }
 
