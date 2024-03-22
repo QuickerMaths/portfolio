@@ -4,6 +4,20 @@ import Navigation from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavigationContextProvider } from "@/context/navigation.context";
 import { Toaster } from "@/components/ui/toaster"
+import { Bebas_Neue, Montserrat } from '@next/font/google'
+
+const montserrat = Montserrat({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin-ext'],
+  variable: '--font-montserrat',
+});
+
+const bebasNeue = Bebas_Neue({
+  weight: ['400'],
+  subsets: ['latin-ext'],
+  variable: '--font-bebas-neue',
+});
+
 
 export const metadata: Metadata = {
   title: {
@@ -42,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="w-full">
+      <body className={`w-full ${montserrat.variable} font-sans ${bebasNeue.variable}`}>
         <NavigationContextProvider>
           <ThemeProvider
             attribute="class"

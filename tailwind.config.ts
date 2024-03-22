@@ -16,8 +16,8 @@ const config = {
   prefix: "",
   theme: { 
     fontFamily: {
-      sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
-      serif: ["Bebas Neue", "serif"],
+      sans: ['var(--font-montserrat)'],
+      serif: ['var(--font-bebas-neue)'],
     },
     container: {
       center: true,
