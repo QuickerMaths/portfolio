@@ -11,7 +11,7 @@ const Projects = () => {
   const [width] = useDeviceSize()
   
   return (
-    <main className="content-container min-h-screen flex justify-center items-center">
+    <main className="content-container h-heightWithoutHeader min-h-full flex justify-center items-center">
       {width > 768 ? <StickyScroll content={allProjects} /> : <StickyScrollMobile content={allProjects} />}
     </main>
   )
