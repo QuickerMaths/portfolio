@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { NavigationContextProvider } from "@/context/navigation.context";
 import { Toaster } from "@/components/ui/toaster"
 import { Bebas_Neue, Montserrat } from '@next/font/google'
+import { Providers } from "./providers";
 
 const montserrat = Montserrat({
   weight: ['300', '400', '500', '600', '700'],
@@ -58,18 +59,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`w-full ${montserrat.variable} font-sans ${bebasNeue.variable}`}>
-        <NavigationContextProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-            >
-                <Navigation />
-                {children}
-                <Toaster />                
-          </ThemeProvider>
-        </NavigationContextProvider>
+        <Providers>
+          <Navigation />
+          {children}
+          <Toaster />
+        </Providers>                
       </body>
     </html>
   );
