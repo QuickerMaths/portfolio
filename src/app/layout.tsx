@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import '../../node_modules/devicon/devicon.min.css'
 import "../css/globals.css";
 import Navigation from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
