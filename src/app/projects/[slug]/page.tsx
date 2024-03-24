@@ -28,7 +28,7 @@ export default async function PostPage({ params }: Props) {
   }
 
   return (
-    <div className="h-heightWithoutHeader min-h-full content-container flex flex-col justify-center items-center bg-background py-10">
+    <div className="h-heightWithoutHeader min-h-full content-container flex flex-col bg-background py-10">
       <ProjectAbout project={project} />
       <Separator className="w-[80%] my-4 mx-auto bg-primary" />
       <article className="px-4 py-12 mx-auto content-container">
