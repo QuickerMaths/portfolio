@@ -1,0 +1,93 @@
+---
+title: "Http-server"
+description: "Solution to one of John's Cricket coding challenges. Http-server written in NodeJS using it's net module. Main goal of this poject was to understand how TCP server handles HTTP protocol."
+date: "2024-04-18"
+published: true
+repository: "http-server"
+image_src: "/images/http-server/http-server.png"
+---
+
+[![http server example code screenshot](/images/http-server/http-server.png)](https://github.com/QuickerMaths/http-server)
+
+I've build it using NodeJS net module, I choose this option instead of http module to understand more about how servers works and how to properly handle http request. 
+
+# Overview 
+Project has 3 main files http-server.ts, response.ts and request.ts
+
+## Class: Request
+
+The <code>Request</code> class is created after the server reads and parses an incoming request. It stores processed data such as headers, parameters, request body, path, method, etc.
+
+### Properties
+
+- <code>headers</code>: The headers of the incoming request.
+- <code>params</code>: The parameters of the incoming request.
+- <code>body</code>: The body of the incoming request.
+- <code>path</code>: The path of the incoming request.
+- <code>method</code>: The HTTP method of the incoming request.
+- <code>queryParmas</code>: query parameters from incoming request.
+- <code>url</code>: url of the incoming request.
+- <code>httpVersion</code>: httpVersion of the incoming request.
+
+### Methods
+
+- <code>getHeader()</code>: This method reads from the <code>headers</code> array and returns the value of a header based on the given key.
+
+## Class: Response
+
+The `Response` class is responsible for setting the <code>statusCode</code>, <code>statusText</code>, and <code>headers</code> of the server's response to incoming requests. It provides methods to set these properties individually or all at once, and it provides several ways to send a response to the client.
+
+### Properties
+
+- <code>headersSent</code>: A boolean that indicates if headers were already sent to the client. If <code>true</code>, an error will be thrown when trying to send headers again, as headers can only be sent once.
+
+### Methods
+
+- <code>setStatusCode()</code>: Sets the status code of the response.
+- <code>setStatusText()</code>: Sets the status text of the response.
+- <code>setHeaders()</code>: Sets the headers of the response.
+- <code>setHead()</code>: A convenience method that sets the status code, status text, and headers all at once.
+- <code>send()</code>: Sends the response to the client. This method takes an optional `body` argument and decides how to send the response body based on its type. If the body is a string, it sets the <code>Content-Type</code> to <code>text/html</code>. If the body is an object, boolean, or number, it checks if the body is a buffer. If so, it sets the <code>Content-Type</code> as <code>application/octet-stream</code>. If not, it calls the <code>json()</code> method. Before sending the response to the client, <code>send()</code> sets the <code>Content-Length</code> header to the appropriate value.
+- <code>json()</code>: Sets the <code>Content-Type</code>to <code>application/json</code>, sets the <code>Content-Length</code> header, and sends the response body in JSON format.
+- <code>sendFile()</code>: Sends an HTML file as a response. This method receives a <code>path</code> argument that is validated by the <code>validatePath</code> utility function (only files inside the <code>/src/www/</code> directory are allowed). If the path is valid, <code>sendFile()</code> uses the asynchronous <code>readFile</code> function from Node.js's <code>fs</code> module to first check if the file exists (if not, it sends a 404 response) and then sends the retrieved HTML file with <code>Content-Type</code> set to <code>text/html</code>.
+
+### Private Methods
+
+- <code>_sendHeaders()</code>: Checks if headers have already been sent to the client. If so, it throws an error. If not, it sets the <code>headersSent</code> property to <code>true</code>, sets all previously set headers, and adds a <code>Date</code> header.
+- <code>getHeader()</code>: A simple method that reads from the <code>headers</code> array.
+
+## Class: Http-Server
+
+This is the core class of the application. As mentioned before it uses net module from NodeJS to create a TCP server that can handle http requests. It takes two 
+arguments port and host.
+
+### Properties
+
+- <code>host</code>: host address that server is set on.
+- <code>port</code>: port that server is listening to.
+- <code>server</code>: simply <code>net.Server()</code>
+- <code>listeners</code>: private property of the <code>HttpServer</code> class. It is a <code>Map</code> where each key is a string that represents a combination of an HTTP method and a path (e.g., 'GET /users'), and each value is an object of type <code>RouteType</code>.
+
+<code>RouteType</code> is an object that includes:
+
+- <code>cb</code>: This is a callback function that gets executed when a request matches the route. It takes two arguments: a request object and a response object.
+- <code>keys</code>: This is an array of <code>Key</code> objects from the <code>path-to-regexp</code> (borrowed that from express) library. Each <code>Key</code> represents a dynamic part of the path (e.g., in '/users/:id', 'id' is a dynamic part).
+- <code>pathRegex</code>: This is a regular expression generated from the path using the <code>path-to-regexp</code> library. It is used to match incoming requests to the correct route.
+
+### Methods
+
+- <code>init()</code>: method is responsible for initializing the server. It sets up the server to listen on the specified host and port, and configures event handlers for the server and its connections. Init events:
+    * <code>error</code>: An event handler is set up for the 'error' event. If the error code indicates that the server is already listening or the address is in use, the port number is     incremented and the server attempts to listen again. For any other error, the error is thrown.
+    * <code>connection</code>: An event handler is set up for the 'connection' event. This event is emitted whenever a new connection is made to the server.
+    * <code>data</code>: Within the 'connection' event handler, another event handler is set up for the 'data' event on the socket. This event is emitted whenever data is received from the client. The data is converted to a string and passed to the <code>_parseRequest()</code> method to create a <code>HttpRequest()</code> object. A `HttpResponse()` object is also created, and both objects are passed to the <code>_forwardRequestToListener()</code> method.
+    * <code>error</code>: Another event handler within the 'connection' event handler is set up for the 'error' event on the socket. If the error code indicates that the connection was reset or the socket is not writable, the connection is ended with a '400 Bad Request' response.
+- <code>stop()</code>: stops the server.
+- <code>restart()</code>: stops the server and starts to listen on the same port and host.
+- <code>get()</code> and <code>post()</code> - takes two parameters path and the callback function to execute when a request is received on the specified path. This function should accept two arguments: a request object and a response object. Method first creates an array of `Key` objects and a regular expression from the path using the <code>pathToRegexp</code> function. Each <code>Key</code> object represents a dynamic part of the path. It then creates a <code>route</code> object that includes the callback function, the array of <code>Key</code> objects, and the regular expression. Finally, it adds the <code>route</code> object to the <code>listeners</code> map with a key that combines the HTTP method (GET) and the path.
+
+### Private Methods
+
+- <code>_parseRequest()</code>: This private method is responsible for parsing an incoming request and creating a new <code>HttpRequest</code> object from the parsed data. Here's how it works:
+- <code>_createParams()</code>: This private method is responsible for creating a <code>params</code> object from the path of the incoming request. It starts by creating an empty <code>params</code> object. It then finds a matching route from the <code>listeners</code> map using the path of the incoming request. If a matching route is found, it executes the route's regular expression against the path to get a match. If a match is found, it iterates over the keys of the matching route. For each key, it adds a new property to the <code>params</code> object where the property name is the key name and the property value is the corresponding matched value from the path. Finally, it returns the <code>params</code> object.
+- <code>_parseHeaders()</code>: This private method is responsible for parsing the headers of the incoming request using <code>reduce()</code> and <code>split()</code> funtcions.
+- <code>_forwardRequestToListener()</code>: This private method is responsible for forwarding the request and response to the appropriate listener. It starts by finding a matching route from the <code>listeners</code> map using the path of the incoming request. If a matching route is found, it calls the callback function of the matching route with the request and response as arguments. If no matching route is found, it sets the response status to '404 Not Found' and sends the response.

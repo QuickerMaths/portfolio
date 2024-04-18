@@ -1,5 +1,5 @@
-[data-rehype-pretty-code-fragment] code {
-    @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0 text-sm text-black;
+code {
+    @apply break-words rounded-sm border-0 bg-gray-300 dark:bg-gray-500 px-2 py-1 text-sm dark:text-white text-gray-800; 
     counter-reset: line;
     box-decoration-break: clone;
   }
