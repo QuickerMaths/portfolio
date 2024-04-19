@@ -3,9 +3,60 @@ title: "TagsOverflow"
 description: "Visually pleasing user interface for searching tags from Stack Overflow API has feature like lazy loading, prefetching data, error boundriess and many more. Created using Vite, React and Typescript."
 date: "2024-04-18"
 published: true
-url: https://tags-overflow.vercel.app/
+url: https://tags-overflow.vercel.app/ 
 repository: "tagsoverflow"
 image_src: "/images/tagsoverflow/tagsoverflow.png"
 ---
 
 [![website landing page screenshot](/images/tagsoverflow/tagsoverflow.png)](https://mmcerber.com)
+
+TagsOverflow is a user-friendly React application that enables users to efficiently search 
+through tags, fetched directly from the Stack Overflow API. The application features a clean 
+and simple design, enhanced with practical functionalities such as data prefetching, lazy 
+loading of components, and responsive loading states. These features, along with subtle 
+animations, ensure a smooth and engaging user experience.
+
+## Overview
+
+- **State Menagment:** I've choose to use the <code>Context API</code> with combination of <code>useReducer</code> hook due to the application's simplicity and size. It manages a form state for handling tags, using 
+a reducer for state updates. The provider exposes an API with functions to dispatch actions to the reducer. Notably, it integrates with React Query to fetch data whenever the state changes, 
+using axios for HTTP requests. This ensures efficient data fetching and synchronization, providing a smooth user experience. The state and API are made accessible to any component that calls 
+the <code>useTagsProvider</code> hook.
+
+- **Data fetching:** Data fetching is being handled by tanstack query and axios inside of HOC which makes it easy to test. Fetching statrts as soon as possibe thanks to react's-router loader functionality, this makes sure that user can 
+see result as soon as possible. Application also utalizes data caching by using <code>query keys</code> and <code>keepPrevoiusData</code> provided by tanstack query application avoids unnecessary
+API calls, that makes it very performent even on devices with slow internet connection.
+
+- **Form:** implemented shadcn.ui and react-hook-form. Form provides a complex filtering funtionality, like search, sorting, number of tags per page, pagination serching withing certain time range 
+and specifing of maximum and minimum of realted posts. Whole form is bedounced to avoid unnecessary API calls. Besides that shadcn components provides greate accessibility
+
+- **Error Boundires:** TagsOverflow provides great user experience even if error occures by using react-error-boundires and custom error fallbacks that informs users taht something went wrong.
+
+- **Lazy loading and skeleton components:** Thanks to lazy loading and suspense user is able to see first conent on his screen as soon as possible even with slow internet connection, skeleton components makes 
+user experience very smooth and avoids any Cumulative Layout Shifts.
+
+- **Data validaton:** data is being validated uing zod. Validation occures when user inputs serach queries into the form, that provides descriptive error messages if some input is invalid. 
+Besides thats incoming data from API is also validated by proper type schema and <code>parse</code> function from zod, which provides type safe response from API and makes code more maintanable.
+
+- **Components:** for component library i choose shadcn.ui, which provides greate developer experince as it is easy to use, very cusomizble and provides great accessiblity features. 
+
+- **Tests:** Applications components are fully tested by Storybook, which make codebase maintanable and easy to develop in the future.
+
+- **Animations:** There is one simple animaton done with framer-motion that makes user experience even more pleasent.
+
+- **Best pracices:** This codebase is full on best practices such as conssistent naming convention, good project structure, separation of concers, mocking in the test files and mentioned above
+data caching and validation, error handling, lazy loading.
+
+## Lighthouse report
+
+[![website light house report](/images/tagsoverflow/lighthouse-report.png)](https://mmcerber.com)
+
+## Conclusion
+
+In conclusion, TagsOverflow is a robust, user-friendly application that leverages the power of modern React libraries and best practices to provide a smooth and efficient user experience. The application's architecture is designed with performance, maintainability, and user experience in mind. It utilizes efficient data fetching, state management, and error handling strategies to ensure a seamless user experience. The use of lazy loading and skeleton components ensures quick load times, even on slower internet connections.
+
+The application's form provides complex filtering functionality, enhancing the user's ability to search and sort through tags. Data validation is implemented at multiple levels, ensuring the integrity of user inputs and API responses. The use of a component library and animations further enhances the user experience, making the interface intuitive and pleasant to use.
+
+The application's codebase adheres to best practices, including consistent naming conventions, a well-organized project structure, and separation of concerns. The components are fully tested, ensuring the maintainability and future development of the codebase.
+
+Overall, TagsOverflow is a testament to the capabilities of modern web development tools and practices, demonstrating how they can be leveraged to create efficient, user-friendly applications.
