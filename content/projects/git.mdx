@@ -1,0 +1,54 @@
+---
+title: "Git"
+description: "Solution to John's Cricket, build your Git coding challange. Completing this project allowed me to understand git fundamentals and how it works under the hood."
+date: "2024-04-18"
+published: true
+repository: "http-server"
+image_src: "/images/git/git.png"
+---
+
+[![git example commands screenshot](/images/git/git.png)](https://github.com/QuickerMaths/git)
+
+# About
+
+Completing this project has been one of the most challenging yet rewarding experiences in my development journey. Through this process, I have significantly deepened my understanding of Git, not merely in terms of its commands but also in grasping the underlying mechanisms that make it such a powerful version control tool.
+
+## Deep Dive into Git Internals
+
+The journey began with mastering the basics, such as hashing blobs and storing them in the object database. This foundational step gave me insight into how Git tracks changes and manages its content. By working with these lower-level constructs, I learned how Git uses SHA-1 hashes to uniquely identify objects, ensuring data integrity and enabling efficient storage.
+
+As the project advanced, I tackled more complex tasks, such as writing data to the index file and parsing it to retrieve the current state of the project. This phase was particularly enlightening as it involved understanding how Git stages changes before committing them, maintaining a record of the project's current state, and preparing it for future commits.
+
+Creating trees and commits was another milestone that significantly expanded my comprehension of Git’s architecture. Constructing these structures involved linking multiple blobs and trees to form a coherent snapshot of the repository. Parsing these trees and commits allowed me to understand how Git represents the state of the project at different points in time, enabling me to visualize and manage the project's history effectively.
+
+## Commands Implemented
+
+**Porcelain Commands**:
+
+1. **`init`**: This command initializes a new repository by creating an empty `.git` directory. It sets up the necessary subdirectories and initial files, laying the groundwork for version control.
+
+2. **`add`**: Adds file changes to the staging area by updating the index. This command is crucial for preparing changes to be included in the next commit, marking them as staged.
+
+3. **`commit`**: Records changes to the repository by creating a new commit from staged changes. This command captures a snapshot of the project’s current state and saves it to the repository history.
+
+4. **`status`**: Displays the current status of the working directory and index, showing which files are staged for commit, which are modified, and which are untracked. This command helps in understanding the current state of the repository.
+
+5. **`diff`**: Compares two commits, trees, or working directory states to show the changes between them. This command provides a detailed view of differences, facilitating code review and debugging. To really understand how diff command works I've built my own diff tool, you can check it out on my [github](https://github.com/QuickerMaths/diff).
+
+**Plumbing Commands**:
+
+1. **`hash-object`**: Converts a file into a Git object by computing its SHA-1 hash and storing it in the object database. This command is fundamental for tracking content as objects in Git.
+
+2. **`cat-file`**: Allows examination of a Git object’s contents or type by reading it from the object database. This command is crucial for verifying stored data and understanding object types.
+
+3. **`write-tree`**: Constructs a tree object from the current state of the index, representing the directory structure and content of the working directory. This command is key to creating snapshots of the repository.
+
+4. **`commit-tree`**: Creates a new commit object with the given tree and parent commits, associating it with a specific state of the repository. This command finalizes changes into the project history.
+
+5. **`update-index`**: Manages the index file by adding or updating entries, reflecting changes in the working directory. This command is essential for staging changes before committing them.
+
+6. **`ls-tree`**: Lists the contents of a tree object, providing a view of the directory structure at a specific commit. This command helps in inspecting the contents of a tree, showing blobs and subtrees.
+
+## Conclusion 
+
+This project has not only enhanced my technical skills but also my problem-solving abilities. I learned to navigate and overcome various challenges, from managing data integrity with SHA-1 hashing to constructing complex data structures and interpreting them. Each step of the project provided a deeper appreciation of Git’s design and functionality, reinforcing the importance of understanding the tools we use as developers.
